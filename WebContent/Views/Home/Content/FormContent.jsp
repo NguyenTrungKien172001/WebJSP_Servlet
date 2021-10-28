@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Form content</title>
-</head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,6 +15,48 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	function validate() {
+		var title = document.myForm.title.value;
+		if(title==""){
+			alert("Plesase Enter Title");
+			document.myForm.title.focus();
+			return false;
+		}
+		if(title.length<10 || title.length>200){
+			alert("Title is of invalid length (10 -> 200)");
+			document.myForm.title.focus();
+			return false;
+		}
+		
+		var brief = document.myForm.brief.value;
+		if(brief==""){
+			alert("Plesase Enter Brief");
+			document.myForm.brief.focus();
+			return false;
+		}
+		if(brief.length<30 || brief.length>150){
+			alert("Brief is of invalid length (30 -> 150)");
+			document.myForm.brief.focus();
+			return false;
+		}
+		
+		var content = document.myForm.content.value;
+		if(content==""){
+			alert("Plesase Enter Content");
+			document.myForm.content.focus();
+			return false;
+		}
+		if(content.length<30 || content.length>1000){
+			alert("Content is of invalid length (30 -> 1000)");
+			document.myForm.content.focus();
+			return false;
+		}
+	}
+
+</script>
+</head>
+
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <body>
 	<div class="container-fluid">
@@ -36,7 +77,7 @@
 					  </div>
 					  <div class="card-body row">
 					    <div class="col-sm-9">
-					    	<form>
+					    	<form name="myForm" method="POST" action="${pageContext.request.contextPath}/member/FormContentServlet">
 							  <div class="mb-3">
 							    <label for="title" class="form-label"><b>Title</b></label>
 							    <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title">
@@ -49,7 +90,7 @@
 							    <label for="content" class="form-label"><b>Content</b></label>
 							    <textarea  class="form-control" id="content" name="content" rows="7"></textarea>
 							  </div>
-							  <button type="submit" class="btn btn-outline-success">Submit Button</button>
+							  <button type="submit" class="btn btn-outline-success" onclick="return validate();">Submit Button</button>
 							  <button type="reset" class="btn btn-outline-success">Reset Button</button>
 							</form>
 					    </div>

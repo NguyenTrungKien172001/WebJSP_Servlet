@@ -51,10 +51,11 @@ public class Login extends HttpServlet {
 		if(entity!=null) {
 			HttpSession servletSession = request.getSession();
 			// ghi thong tin member
-			servletSession.setAttribute("user", entity);
+			servletSession.setAttribute("Member", entity);
 			response.sendRedirect(request.getContextPath()+"/Home");
 		}else {
-			response.sendRedirect(request.getContextPath()+"/Login");
+			request.setAttribute("mess", "Incorrect password or email");
+			doGet(request, response);
 		}
 		
 	}

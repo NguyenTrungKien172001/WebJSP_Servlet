@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
-</head>
 <!-- CSS only -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -17,13 +16,72 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+	function validate() {
+		var username = document.myForm.username.value;
+		if(username==""){
+			alert("Plesase Enter Username");
+			document.myForm.username.focus();
+			return false;
+		}
+		if(username.length<3 || username.length>30){
+			alert("Username is of invalid length (3 -> 30)");
+			document.myForm.username.focus();
+			return false;
+		}
+		var email = document.myForm.email.value;
+		if(email==""){
+			alert("Plesase Enter Email");
+			document.myForm.email.focus();
+			return false;
+		}
+		if(email.length<5 || email.length>50){
+			alert("Email is of invalid length (5 -> 50)");
+			document.myForm.email.focus();
+			return false;
+		}
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(!email.match(mailformat))
+		{
+			alert("You have entered an invalid email address");
+			document.myForm.email.focus();
+			return false;
+		}
+		var password = document.myForm.password.value;
+		if(password==""){
+			alert("Plesase Enter Password");
+			document.myForm.password.focus();
+			return false;
+		}
+		if(password.length<8 || password.length>30){
+			alert("Password is of invalid length (8 -> 30)");
+			document.myForm.password.focus();
+			return false;
+		}
+		var Repassword = document.myForm.Repassword.value;
+		if(Repassword==""){
+			alert("Plesase Enter RePassword");
+			document.myForm.Repassword.focus();
+			return false;
+		}
+		if(Repassword!=password){
+			alert("Plesase Enter RePassword == password");
+			document.myForm.Repassword.focus();
+			return false;
+		}
+	}
+
+</script>
+</head>
+
 <body>
 	<div class="container mt-5">
 		<div class="d-flex justify-content-center ">
 			<div class="card col-md-4 mt-5">
 				<div class="card-header">Register</div>
 				<div class="card-body">
-					<form>
+					<form name="myForm" method="POST" action="${pageContext.request.contextPath}/Register">
 						<div class="mb-3">
 							<input type="text" class="form-control" id="username"
 								name="username" placeholder="User name">
@@ -40,7 +98,10 @@
 							<input type="password" class="form-control" name="Repassword"
 								placeholder="Re Password" id="Repassword">
 						</div>
-						<button type="submit"
+						<div class="mb-3">
+							<h5 style="color: red">${mess}</h5>
+						</div>
+						<button type="submit" onclick="return validate();"
 							class="btn btn-lg btn-success mb-3 col-md-12">Register</button>
 						<br /> <a href="${pageContext.request.contextPath}/Login"
 							style="text-decoration: none">Click here to Login</a>

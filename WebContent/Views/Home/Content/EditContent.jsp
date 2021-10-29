@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Form content</title>
+<title>Edit content</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -69,7 +69,7 @@
 			</aside>
 			<article class="col-md-10 mt-5">
 				<div class="p-4">
-					<h2>Add Content</h2>
+					<h2>Edit Content</h2>
 					<hr>
 					<div class="card">
 					  <div class="card-header">
@@ -77,27 +77,22 @@
 					  </div>
 					  <div class="card-body row">
 					    <div class="col-sm-9">
-					    	<form name="myForm" method="POST" action="${pageContext.request.contextPath}/member/FormContentServlet">
+					    	<form name="myForm" method="POST" action="${pageContext.request.contextPath}/member/EditContentServlet?id=${content.id }">
 							  <div class="mb-3">
 							    <label for="title" class="form-label"><b>Title</b></label>
-							    <input type="text" class="form-control" id="title" name="title" placeholder="Enter the title">
+							    <input type="text" class="form-control" id="title" name="title" value="${content.title }" placeholder="Enter the title">
 							  </div>
 							  <div class="mb-3">
 							    <label for="brief" class="form-label"><b>Brief</b></label>
-							    <textarea  class="form-control" id="brief" name="brief" rows="3"></textarea>
+							    <textarea  class="form-control" id="brief" name="brief" rows="3">${content.brief }</textarea>
 							  </div>
 							  <div class="mb-3">
 							    <label for="content" class="form-label"><b>Content</b></label>
-							    <textarea  class="form-control" id="content" name="content" rows="7"></textarea>
+							    <textarea  class="form-control" id="content" name="content"  rows="7">${content.content }</textarea>
 							  </div>
 							  <button type="submit" class="btn btn-outline-success" onclick="return validate();">Submit Button</button>
 							  <button type="reset" class="btn btn-outline-success">Reset Button</button>
 							</form>
-					    </div>
-					    <div class="col-sm-3">
-					    	<div class="mt-3">
-								<h5 style="color: red">${mess}</h5>
-							</div>
 					    </div>
 					  </div>
 					</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <style type="text/css">
 	.sidebar {
 	  position: fixed;
@@ -27,7 +28,7 @@
 	  overflow-y: auto;
 	}
 </style>
-	
+
 	
 <!-- Sidebar -->
   <nav
@@ -37,19 +38,22 @@
     <div class="position-sticky">
     
       <div class="list-group list-group-flush mx-3 mt-4">
-      	<div class="mb-2">
-        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-        </div><hr>
+      	
+        <form class="input-group mb-2" method="GET" action="${pageContext.request.contextPath}/member/ViewContentServlet">
+			 <input type="text" class="form-control" placeholder="Search content" name="keySearch" value="${sessionScope.keySearch }" aria-label="Search title" aria-describedby="button-addon2">
+			 <button class="btn btn-outline-secondary" type="submit" id="button-addon2" ><i class='fas fa-search'></i></button>
+		</form>
+        <hr>
         <a
            href="${pageContext.request.contextPath}/member/ViewContentServlet"
            class="list-group-item list-group-item py-2 ripple"
-           >
+           ><i class='fas fa-list'></i>
          <span>View contents</span>
         </a>
         <a
            href="${pageContext.request.contextPath}/member/FormContentServlet"
            class="list-group-item list-group-item py-2 ripple "
-           >
+           ><i class='fas fa-edit'></i>
           <span>Form content</span>
         </a>
       </div>

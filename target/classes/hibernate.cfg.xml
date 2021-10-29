@@ -9,6 +9,7 @@
         <property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=CMS;</property>
         <property name="hibernate.connection.username">sa</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.legacy_limit_handler">true</property>
         
         <mapping class="com.model.Content"></mapping>
         <mapping class="com.model.Member"></mapping>

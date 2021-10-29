@@ -28,8 +28,9 @@
 			</aside>
 			<article class="col-md-10 mt-5">
 				<div class="p-4">
-					<h2 class="text-center">Hello Member</h2>
-					<hr>
+					<h2 class="text-center">Hello, ${Member.username }</h2>
+					<hr><br/>
+					<h3 align="center">Website built by Nguyen Trung Kien</h3>
 				</div>
 			</article>
 

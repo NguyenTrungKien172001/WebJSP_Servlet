@@ -96,11 +96,11 @@
 					    	<form name="myForm" method="POST" action="${pageContext.request.contextPath}/member/EditProfileServlet">
 							  <div class="mb-3">
 							    <label for="firstname" class="form-label"><b>First Name</b></label>
-							    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter the first name">
+							    <input type="text" class="form-control" id="firstname" name="firstname" value="${Member.firstname }" placeholder="Enter the first name">
 							  </div>
 							  <div class="mb-3">
 							    <label for="lastname" class="form-label"><b>Last Name</b></label>
-							    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter the last name">
+							    <input type="text" class="form-control" id="lastname" name="lastname" value="${Member.lastname }" placeholder="Enter the last name">
 							  </div>
 							  <div class="mb-3">
 							    <label for="email" class="form-label"><b>Email</b></label><br/>
@@ -108,15 +108,20 @@
 							  </div>
 							  <div class="mb-3">
 							    <label for="phone" class="form-label"><b>Phone</b></label>
-							    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter the phone number 0123...">
+							    <input type="text" class="form-control" id="phone" name="phone" value="${Member.phone }" placeholder="Enter the phone number 0123...">
 							  </div>
 							  <div class="mb-3">
 							    <label for="description" class="form-label"><b>Description</b></label>
-							    <textarea  class="form-control" id="description" name="description" rows="3"></textarea>
+							    <textarea  class="form-control" id="description" name="description" rows="3">${Member.description }</textarea>
 							  </div>
 							  <button type="submit" class="btn btn-outline-success" onclick="return validate();">Submit Button</button>
 							  <button type="reset" class="btn btn-outline-success">Reset Button</button>
 							</form>
+					    </div>
+					    <div class="col-sm-3">
+					    	<div class="mt-3">
+								<h5 style="color: red">${mess}</h5>
+							</div>
 					    </div>
 					  </div>
 					</div>

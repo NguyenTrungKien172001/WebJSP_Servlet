@@ -1,33 +1,33 @@
 package com.servlet.controller;
 
 import java.io.IOException;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.dao.ContentDAO;
 import com.model.Content;
-import com.model.Member;
+
 
 /**
- * Servlet implementation class FormContentServlet
+ * Servlet implementation class EditContentServlet
  */
-@WebServlet("/member/FormContentServlet")
-public class FormContentServlet extends HttpServlet {
+@WebServlet("/member/EditContentServlet")
+public class EditContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
 	ContentDAO contentDAO;
-    public FormContentServlet() {
-        contentDAO = new  ContentDAO();
+    public EditContentServlet() {
+        contentDAO = new ContentDAO();
     }
 
 	/**
@@ -35,30 +35,27 @@ public class FormContentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/Views/Home/Content/FormContent.jsp").forward(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		Content entity = this.contentDAO.findById(id);
+		request.setAttribute("content", entity);
 		
+		request.getRequestDispatcher("/Views/Home/Content/EditContent.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("Member");
-		
-		
-		Content entity = new Content();
-		entity.setUpdateTime(null);
-		entity.setDeleteAt(false);
-		entity.setSort("asc");
-		entity.setMember(member);
+		// TODO Auto-generated method stub
+		int id = Integer.parseInt(request.getParameter("id"));
+		Content entity = this.contentDAO.findById(id);
+		entity.setUpdateTime(new Date());
 		
 		try {
 			BeanUtils.populate(entity, request.getParameterMap());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		try {
 			
@@ -88,14 +85,14 @@ public class FormContentServlet extends HttpServlet {
 				System.out.println("Content is of invalid length (30 -> 1000)");
 				return ;
 			}
-				
-				
-			contentDAO.store(entity);
-			request.setAttribute("mess", "Create Success");
-			doGet(request, response);
+			
+			this.contentDAO.update(entity);
+			//chuyen ve form view content
+			response.sendRedirect(request.getContextPath()+"/member/ViewContentServlet");
+		
 		} catch (Exception e) {
-			request.setAttribute("mess", "Create False");
-			doGet(request, response);
+			// TODO: handle exception
+			System.out.println("false");
 		}
 	}
 

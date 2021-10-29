@@ -29,13 +29,14 @@ public class MemberDAO {
 			String hql = "FROM Member";
 			Session session = HibernateUtils.getSession();
 			Query query = session.createQuery(hql);
-			query.setFirstResult(offset);
+			query.setFirstResult(offset); 
 			query.setMaxResults(offset + limit);
 
 			List<Member> listMember = query.getResultList();
 
 			return listMember;
 		}
+		
 		//get All
 		public List<Member> getAll() {
 			String hql = "FROM Member";
@@ -94,7 +95,8 @@ public class MemberDAO {
 				
 				return entity;
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("Email or Password is Null");
+//				e.printStackTrace();
 			}
 			
 			

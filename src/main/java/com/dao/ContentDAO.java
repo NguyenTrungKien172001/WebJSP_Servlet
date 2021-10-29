@@ -25,13 +25,18 @@ public class ContentDAO {
 			}
 
 		// lay du lieu
-			public List<Content> paginate(int offset, int limit) {
-				String hql = "FROM Content";
+			public List<Content> paginate(int offset, int limit, String keySearch) {
+				
+				String hql = "SELECT obj FROM Content obj Where obj.DeleteAt = 0 AND obj.Title LIKE ?1";
 				Session session = HibernateUtils.getSession();
 				Query query = session.createQuery(hql);
+		
+				
 				query.setFirstResult(offset);
 				query.setMaxResults(offset + limit);
-
+				query.setParameter(1,"%"+keySearch+"%");
+				
+				
 				List<Content> listContent = query.getResultList();
 
 				return listContent;
@@ -39,7 +44,7 @@ public class ContentDAO {
 			
 			//get All
 			public List<Content> getAll() {
-				String hql = "FROM Content";
+				String hql = "SELECT obj FROM Content obj Where obj.DeleteAt = 0";
 				Session session = HibernateUtils.getSession();
 				Query query = session.createQuery(hql);
 				List<Content> listContent = query.getResultList();

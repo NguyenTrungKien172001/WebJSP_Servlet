@@ -35,8 +35,7 @@ public class AuthFilter implements Filter {
 
 		if (authMember == null) {
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			HttpServletRequest httRequest = (HttpServletRequest) request;
-			httpResponse.sendRedirect(httRequest.getContextPath()+ "/Login");
+			httpResponse.sendRedirect(httpRequest.getContextPath()+ "/Login");
 		}else {
 			chain.doFilter(request, response);
 		}

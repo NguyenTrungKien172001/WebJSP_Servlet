@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>View content</title>
-</head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,6 +16,21 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
+<script type="text/javascript">
+	function check() {
+	  var r = confirm("You want to delete!");
+	  if (r == true) {
+		alert("Delete success");
+	    return true;
+	  } else {
+	    return false;
+	  }
+	}
+
+</script>
+</head>
+
 <body>
 	<div class="container-fluid">
 		<div class="row">
@@ -43,28 +57,35 @@
 								      <th scope="col">Title</th>
 								      <th scope="col">Brief</th>
 								      <th scope="col">Create Date</th>
+								      <th scope="col">Action</th>
 								    </tr>
 								  </thead>
 								  <tbody>
-								    <tr>
-								      <th scope="row">1</th>
-								      <td>Mark</td>
-								      <td>Otto</td>
-								      <td>@mdo</td>
-								    </tr>
-								    <tr>
-								      <th scope="row">2</th>
-								      <td>Jacob</td>
-								      <td>Thornton</td>
-								      <td>@fat</td>
-								    </tr>
-								    <tr>
-								      <th scope="row">3</th>
-								      <td colspan="2">Larry the Bird</td>
-								      <td>@twitter</td>
-								    </tr>
+								    <c:forEach items="${listContent}" var="content">
+										<tr>
+											<td>${content.id}</td>
+											<td>${content.title}</td>
+											<td>${content.brief}</td>
+											<td>${content.createdDate}</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/member/EditContentServlet?id=${content.id }" class="btn btn-outline-warning mr-1">Update</a>
+												<a href="${pageContext.request.contextPath}/member/SoftDeleteContentServlet?id=${content.id}" class="btn btn-outline-danger" onclick="return check();">Delete</a>
+											</td>
+										</tr>
+									</c:forEach>
 								  </tbody>
 							</table>
+							<ul class="pagination">
+								<li class="page-item"><a
+									href="${pageContext.request.contextPath}/member/ViewContentServlet?page=${page == 1 ? page : page-1}" class="page-link">Previos</a>
+								</li>
+								<li class="page-item">
+									<a class="page-link">${page}</a>
+								</li>
+								<li class="page-item"><a
+									href="${pageContext.request.contextPath}/member/ViewContentServlet?page=${page + 1}" class="page-link">Next</a>
+								</li>
+							</ul>
 					    </div>
 					  </div>
 					</div>
